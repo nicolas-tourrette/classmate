@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.1.0-rc1",
+        "date": "5 novembre 2020",
+        "changes": [
+            "Amélioration conséquente avec les fichiers de configuration d'environnement"
+        ],
+        "issues": []
+    },
+    {
         "version": "1.0.0-rc2",
         "date": "5 novembre 2020",
         "changes": [

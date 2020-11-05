@@ -4,4 +4,4 @@ This is a little web TypeScript application to perform a booking system for appo
 
 ## Current version
 
-V1.0.0-RC2 - November 5th 2020
+V1.1.0-RC1 - November 5th 2020
