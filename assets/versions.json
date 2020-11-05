@@ -1,0 +1,22 @@
+[
+    {
+        "version": "1.0.0-rc2",
+        "date": "5 novembre 2020",
+        "changes": [
+            "Version initiale améliorée <strong>candidate</strong> à la mise en production",
+            "Ajout du suivi de versions avec fichier JSON"
+        ],
+        "issues": []
+    },
+    {
+        "version": "1.0.0-rc1",
+        "date": "2 novembre 2020",
+        "changes": [
+            "Version initiale <strong>candidate</strong> à la mise en production"
+        ],
+        "issues": [
+            "Pas de page \"À propos\"",
+            "Pas de changelog"
+        ]
+    }
+]

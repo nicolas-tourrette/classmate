@@ -1,0 +1,40 @@
+﻿body {
+    padding-top: 6rem;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+footer.footer {
+    z-index: 99;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 10px;
+    height: 70px;
+    background-color: #f5f5f5;
+}
+
+h2#pollName {
+    text-decoration: underline dotted #cecece;
+    cursor: pointer;
+}
+
+h2#pollName:hover {
+    text-decoration: underline dashed #cecece;
+}
+
+table.appointments td {
+    text-align: center;
+}
+
+.badge.bg-primary-soft {
+    line-height: 1.5 !important;
+    font-size: .75em;
+    padding: .25rem .75rem;
+    background-color: rgba(51,94,234,.1);
+    color: #335eea;
+}
+
+.text-gray-700 {
+    color: #506690!important;
+}
