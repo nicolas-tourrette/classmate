@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/database.php';
+require_once __DIR__.'/../../config/parser.php';
 
 /**
  * Database connector
@@ -13,7 +14,8 @@ class DatabaseSite extends DataBase
 	 */
 	protected function __construct()
 	{
-        parent::__construct('localhost', 'classmate', 'username', 'password');
+        $parser = new ConfigLoader();
+        parent::__construct('localhost', 'classmate', $parser->getDatabaseConfig()["username"], $parser->getDatabaseConfig()["password"]);
 		parent::connect();
 	}
 
