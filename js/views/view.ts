@@ -33,7 +33,7 @@ class View implements Observer {
     /**
      * Initializes the view
      */
-    initView() {
+    private initView() {
         window.addEventListener("hashchange", () => { this._message = ""; this._url = window.location.hash.substring(1); this.notify(); });
 
         this._controller.getPollNames().catch(() => {
@@ -99,7 +99,7 @@ class View implements Observer {
     /**
      * Router of the view
      */
-    router(){
+    private router(){
         switch (true) {
             case /^$/.test(this._url):
                 this.displayHome();
@@ -151,7 +151,7 @@ class View implements Observer {
         }
     }
 
-    displayAdminLink(){
+    private displayAdminLink(){
         let adminLi = document.querySelector("li.nav-item[data-target='admin']");
         adminLi.classList.add("dropdown");
         adminLi.innerHTML = `
@@ -166,7 +166,7 @@ class View implements Observer {
     /**
      * Displays homepage
      */
-    displayHome() {
+    private displayHome() {
         let content = "";
         if (this._url === "logout") {
             content = `
@@ -187,30 +187,36 @@ class View implements Observer {
             <div class="media">
                 <div class="media-body">
                     <h5 class="mt-0">Bienvenue sur Classmate !</h5>
-                    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                        <h4 class="alert-heading">Version candidate !</h4>
-                        <p>
-                            Attention, cette version est seulement candidate à une mise en production. Il convient de valider son fonctionnement avant de basculer sur une version complètement opérationnelle.
-                        </p>
-                        <hr>
-                        <p class="mb-0"><small>
-                            Une fois le fonctionnement validé, cette version sera basculée en production. Version 1.0.0-rc2
-                        </small></p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+        `;
+        if(this._controller.versions[0] !== undefined && this._controller.versions[0].version.indexOf("rc") !== -1){
+            content += `
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Version candidate !</h4>
+                    <p>
+                        Attention, cette version est seulement candidate à une mise en production. Il convient de valider son fonctionnement avant de basculer sur une version complètement opérationnelle.
+                    </p>
+                    <hr>
+                    <p class="mb-0"><small>
+                        Une fois le fonctionnement validé, cette version sera basculée en production. Version ${this._controller.versions[0].version}
+                    </small></p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `;
+        }
+        content += `
                     <p class="text-justify">
                         Classmate permet de prendre rendez-vous. Pour cela, rendez-vous dans un sondage, choisissez un rendez-vous parmi les propositions, saisissez votre nom et votre adresse email puis validez. Votre rendez-vous est réservé et vous recevez la confirmation par email.
                     </p>
                 </div>
-                <img src="img/icone.png" class="ml-5 img-fluid img-thumbnail" style="width: 200px;">
+                <img src="img/icone.png" class="ml-5 img-fluid img-thumbnail" style="width: 200px;" alt="Classmate">
             </div>
         `;
         this._container.innerHTML = content;
     }
 
-    displayAbout(){
+    private displayAbout(){
         document.querySelector(`a[href="#about/about"]`).classList.add("active");
 
         this._container.innerHTML = `
@@ -219,7 +225,7 @@ class View implements Observer {
                 Classmate est un logiciel web de prise de rendez-vous en ligne avec l'enseignant. Il ne demande que la sélection d'un rendez-vous dans le planning déjà prévu par l'enseignant, le nom et d'adresse email du parent concerné. Cela facilite la vie de chacun !
             </p>
             <p class="text-center">
-                <img src="img/icone.png" class="ml-5 img-fluid img-thumbnail" style="width: 200px;">
+                <img src="img/icone.png" class="ml-5 img-fluid img-thumbnail" style="width: 200px;" alt="Classmate">
             </p>
 
             <h1 class="mt-3">Mentions légales</h1>
@@ -245,7 +251,7 @@ class View implements Observer {
     }
 
     
-    displayChangelog(){
+    private displayChangelog(){
         document.querySelector(`a[href="#about/changelog"]`).classList.add("active");
         document.querySelector(`a[href="#about/changelog"] span.badge`).classList.add("text-light");
 
@@ -256,8 +262,7 @@ class View implements Observer {
             this._controller.versions.forEach((version) => {
                 history += `
                     <p id="${version.version}">
-                        <span class="badge rounded-pill bg-primary-soft">v${version.version}</span>
-                        <span>- ${version.date}</span>
+                        <span class="badge rounded-pill bg-primary-soft" style="margin-right: 30px;">v${version.version}</span>Release du <i>${version.date}</i>
                     </p>
                     <p class="lead">Changements apportés</p>
                     <ul class="text-gray-700">
@@ -329,7 +334,7 @@ class View implements Observer {
      * Displays the poll
      * @param sondage The poll ID to display
      */
-    displaySondage(sondage: string) {
+    private displaySondage(sondage: string) {
         try {
             document.querySelector(`a[href="#sondages/${sondage}"]`).classList.add("active");
         } catch (error) {
@@ -358,7 +363,7 @@ class View implements Observer {
         }
     }
 
-    displaySondageContent(sondage: string){        
+    private displaySondageContent(sondage: string){
         let content = `<h1>${this._controller.poll.name}</h1>`;
         content += `<form id="${sondage}">`;
         content += `
@@ -475,7 +480,7 @@ class View implements Observer {
     /**
      * Authenticates a user
      */
-    authenticate() {
+    private authenticate() {
         this._container.innerHTML = `
             <h1>Administration</h1>
             ${this._url !== "admin" ?
@@ -524,7 +529,7 @@ class View implements Observer {
     /**
      * Displays the home for an administrator
      */
-    displayAdminHome() {
+    private displayAdminHome() {
         let that = this;
         let content = `
             <h1>Administration</h1>
@@ -583,7 +588,7 @@ class View implements Observer {
         document.querySelector("button#submitNewPoll").addEventListener("click", () => {
             if (document.querySelector("input#name").value !== "") {
                 let poll = new Poll({
-                    id: document.querySelector("input#name").value.trim().replace(/\s+/g, '').toLowerCase(),
+                    id: this.trimString(document.querySelector("input#name").value.trim().replace(/\s+/g, '').toLowerCase()),
                     name: document.querySelector("input#name").value
                 });
 
@@ -622,7 +627,7 @@ class View implements Observer {
      * Displays the administrator view to manage a poll
      * @param pollID The poll ID to manage
      */
-    displayAdminPoll(pollID: string) {
+   private displayAdminPoll(pollID: string) {
         if (this._controller.poll.id !== pollID) {
             this._controller.getPoll(pollID).catch(() => {
                 this.displayError(204);
@@ -973,7 +978,7 @@ class View implements Observer {
      * Displays an error message
      * @param errorCode The error code to display the right error
      */
-    displayError(errorCode: number) {
+   private displayError(errorCode: number) {
         switch (errorCode) {
             case 404:
                 this._container.innerHTML =
@@ -1009,4 +1014,23 @@ class View implements Observer {
                 break;
         }
     }
+
+   private static trimString(str: string): string{
+        const accent = [
+            /[\300-\306]/g, /[\340-\346]/g, // A, a
+            /[\310-\313]/g, /[\350-\353]/g, // E, e
+            /[\314-\317]/g, /[\354-\357]/g, // I, i
+            /[\322-\330]/g, /[\362-\370]/g, // O, o
+            /[\331-\334]/g, /[\371-\374]/g, // U, u
+            /[\321]/g, /[\361]/g, // N, n
+            /[\307]/g, /[\347]/g, // C, c
+        ];
+        let noaccent = ['A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u', 'N', 'n', 'C', 'c'];
+
+        for(let i = 0; i < accent.length; i++){
+            str = str.replace(accent[i], noaccent[i]);
+        }
+
+        return str.replace(/([- #"@:.,;'%!²=÷+?\/\[\]{}*^$\\`¨€£¤µ§~ƒ„©°])/gi, '');
+   }
 }

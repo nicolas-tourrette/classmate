@@ -1,20 +1,23 @@
 [
     {
-        "version": "1.1.0-rc1",
-        "date": "5 novembre 2020",
+        "version": "1.1.1-rc1",
+        "date": "9 novembre 2020",
         "changes": [
-            "Amélioration conséquente avec les fichiers de configuration d'environnement"
+            "Correction du bug de la création de sondage avec un ID contenant des caractères spéciaux ou accentués"
         ],
         "issues": []
     },
     {
-        "version": "1.0.0-rc2",
+        "version": "1.1.0-rc1",
         "date": "5 novembre 2020",
         "changes": [
             "Version initiale améliorée <strong>candidate</strong> à la mise en production",
-            "Ajout du suivi de versions avec fichier JSON"
+            "Ajout du suivi de versions avec fichier JSON",
+            "Amélioration conséquente avec les fichiers de configuration d'environnement"
         ],
-        "issues": []
+        "issues": [
+            "Création des identifiants de sondages avec caractères spéciaux incorrecte"
+        ]
     },
     {
         "version": "1.0.0-rc1",
