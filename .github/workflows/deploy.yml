@@ -4,7 +4,7 @@ name: Deploy Classmate via SSH
 
 on:
     release:
-        types: [published]
+        types: [ published ]
         branches: [ master ]
 
 jobs:
@@ -42,6 +42,6 @@ jobs:
                     l'adresse <a href=\"${{ secrets.ADDRESS }}\">${{ secrets.ADDRESS }}</a>. La version publiée est la ${{ github.event.release
                     .tag_name }}.</p><p>Cordialement,</p><p>Le gestionnaire Classmate</p><p>--</p><p><pre>Ceci est un e-mail automatique,
                     merci de ne pas y répondre.</pre></p>"
-                    to: "postmaster@nicolas-t.ovh"
+                    to: "Gestionnaire Classmate <postmaster@nicolas-t.ovh>, Marion PELTE <marion.pelte@laposte.net>"
                     from: "Gestionnaire Classmate <noreply@nicolas-t.ovh>"
                     content_type: "text/html"
