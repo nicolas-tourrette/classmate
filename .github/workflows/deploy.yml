@@ -37,7 +37,10 @@ jobs:
                     password: ${{ secrets.MAIL_PASSWORD }}
                     subject: "Déploiement de Classmate"
                     # Literal body:
-                    body: "Build job of ${{github.repository}} completed successfully!"
+                    body: "<p>Bonjour,</p><p>Une nouvelle version de Classmate vient d'être publiée. Elle est désormais disponible en ligne à
+                    l'adresse <a href=\"${{ secrets.ADDRESS }}\">${{ secrets.ADDRESS }}</a>. La version publiée est la ${{ github.event.release
+                    .tag_name }}.</p><p>Cordialement,</p><p>Le gestionnaire Classmate</p><p>--</p><p><pre>Ceci est un e-mail automatique,
+                    merci de ne pas y répondre.</pre></p>"
                     to: "postmaster@nicolas-t.ovh"
-                    from: "Gestionnaire Classmate <postmaster@nicolas-t.ovh>"
+                    from: "Gestionnaire Classmate <noreply@nicolas-t.ovh>"
                     content_type: "text/html"
