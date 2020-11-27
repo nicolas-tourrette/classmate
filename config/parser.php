@@ -18,14 +18,14 @@ class ConfigLoader{
     }
 
     public function getDatabaseConfig(): array {
-        return $this->config[0]["database"];
+        return $this->config["database"];
     }
 
     public function getAuthConfig(): array {
-        return $this->config[1]["authentication"];
+        return $this->config["authentication"];
     }
 
     public function getMailerConfig(): array {
-        return $this->config[2]["mailer"];
+        return $this->config["mailer"];
     }
 }

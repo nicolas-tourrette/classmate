@@ -63,6 +63,8 @@ if(isset($_GET["action"])){
                     $mail->Body .= "<p>Je vous confirme le rendez-vous pris avec moi sur Classmate pour le sondage \"".urldecode($_GET["poll"])."\". Nous nous rencontrerons donc le <b>".$appointment->getStart()->format("d/m/Y à H:i")."</b>.</p>";
                     $mail->Body .= "<p>Bien cordialement,</p>";
                     $mail->Body .= "<p>Mme PELTE<br><i>Enseignante de CM2 A - École privée Sainte Marie - Auxerre</i></p>";
+                    $mail->Body .= "<p>--</p>";
+                    $mail->Body .= "<p><pre>Ceci est un e-mail automatique. Merci de ne pas y répondre.</pre></p>";
 
                     $mail->send();
                 }

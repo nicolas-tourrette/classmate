@@ -1,11 +1,25 @@
 [
     {
+        "version": "1.1.2-rc1",
+        "date": "27 novembre 2020",
+        "changes": [
+            "Correction du problème d'envoi des e-mails de confirmation (plus considérés comme spam ou filtrés)",
+            "Ajout de la mention \"Mail automatique\" dans le mail de confirmation",
+            "Allègement et simplification des fichiers de configuration",
+            "Correction graphique sur les rendez-vous affichés dans le calendrier"
+        ],
+        "issues": []
+    },
+    {
         "version": "1.1.1-rc1",
         "date": "9 novembre 2020",
         "changes": [
             "Correction du bug de la création de sondage avec un ID contenant des caractères spéciaux ou accentués"
         ],
-        "issues": []
+        "issues": [
+            "Problème sur l'envoi des e-mails de confirmation avec Gmail notamment, et filtrage comme spam",
+            "Fichier de configuration perfectible (très lourd)"
+        ]
     },
     {
         "version": "1.1.0-rc1",

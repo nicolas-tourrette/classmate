@@ -401,7 +401,6 @@ class View implements Observer {
                     <div class="col-sm-10">
                         <input type="email" class="form-control" id="email" placeholder="Votre e-mail" required>
                     </div>
-                    <p class="text-danger font-italic ml-3 mt-2" style="font-size: 75%;">Attention : les adresses Gmail ne reçoivent pas les confirmations du fait d'un filtrage réalisé par Google.</p>
                 </div>
                 <button type="submit" class="btn btn-primary">Valider</button>
                 <div id="error" class="mt-3"></div>
@@ -667,7 +666,7 @@ class View implements Observer {
             `;
             events.push({
                 title: "RDV de parents",
-                description: appointment.parentName === "" ? "Toujours libre" : "Avec M. ou Mme" + appointment.parentName,
+                description: appointment.parentName === "" ? "Toujours libre" : "Avec M. ou Mme " + appointment.parentName,
                 start: appointment.start.toISOString(),
                 end: appointment.end.toISOString(),
                 allDay: false,
