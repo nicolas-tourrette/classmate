@@ -4,6 +4,7 @@ name: Deploy Classmate via SSH
 
 on:
     release:
+        types: [published]
         branches: [ master ]
 
 jobs:
