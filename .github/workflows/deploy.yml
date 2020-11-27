@@ -1,0 +1,43 @@
+# .github/workflows/deploy.yml
+
+name: Deploy Classmate via SSH
+
+on:
+    release:
+        branches: [ master ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE,
+            # so your workflow can access it
+            -   uses: actions/checkout@master
+            
+            # Copying files and artifacts via SSH
+            -   name: Copying files to server
+                uses: appleboy/scp-action@master
+                with:
+                    host: ${{ secrets.REMOTE_HOST }}
+                    username: ${{ secrets.USERNAME }}
+                    password: ${{ secrets.PASSWORD }}
+                    port: ${{ secrets.PORT }}
+                    rm: false
+                    overwrite: true
+                    source: "api/*, assets/*, config/*, css/*, img/*, js/*, lib/*, src/*, index.html"
+                    target: "${{ secrets.REMOTE_DIR }}"
+            -   name: Send mail
+                if: ${{ success() }}
+                uses: dawidd6/action-send-mail@v2
+                with:
+                    server_address: ${{ secrets.MAIL_SERVER }}
+                    server_port: ${{ secrets.PORT_MAIL_SERVER }}
+                    username: ${{ secrets.MAIL_USERNAME }}
+                    password: ${{ secrets.MAIL_PASSWORD }}
+                    subject: "Déploiement de Classmate"
+                    # Literal body:
+                    body: "Build job of ${{github.repository}} completed successfully!"
+                    to: "postmaster@nicolas-t.ovh"
+                    from: "Gestionnaire Classmate <postmaster@nicolas-t.ovh>"
+                    content_type: "text/html"
