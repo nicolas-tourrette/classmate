@@ -1,0 +1,30 @@
+---
+- name: APP | Copy files
+  become: no
+  ansible.posix.synchronize:
+    src: "{{ playbook_dir }}/../"
+    dest: "{{ root_path }}"
+    recursive: yes
+    owner: no
+    group: no
+    rsync_opts:
+      - "--exclude=ansible"
+      - "--exclude=.vscode"
+      - "--exclude=node_modules"
+      - "--exclude=sql"
+      - "--exclude=.git*"
+      - "--exclude=package-lock.json"
+      - "--exclude=tsconfig.json"
+      - "--exclude=README.md"
+      - "--exclude=.idea"
+    
+- name: APP | Change config loader env
+  replace:
+    path: "{{ root_path }}/config/parser.php"
+    regexp: '\$this->env = "dev";'
+    replace: '$this->env = "prod";'
+    
+- name: APP | Permissions
+  shell: "chown -R www-data:www-data {{ root_path }} ; chmod -R u=rw,go=r {{ root_path }} ; chmod u=rwx,go=rx $(find {{ root_path }} -type d)"
+  args:
+    warn: false

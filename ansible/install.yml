@@ -1,0 +1,32 @@
+---
+- name: Local tools
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: TOOLS | APT Update and upgrade
+      apt:
+        upgrade: 'yes'
+        update_cache: yes
+    - name: TOOLS | Install tools
+      apt:
+        name:
+          - rsync
+        state: present
+    - name: TOOLS | Install Ansible posix module
+      shell: "ansible-galaxy collection install ansible.posix"
+
+- name: Server installation
+  hosts: remote
+  gather_facts: no
+  remote_user: root
+
+  pre_tasks:
+    - name: SERVER CONFIG | Install tools
+      apt:
+        name:
+          - acl
+        state: present
+  
+  roles:
+    - role: app

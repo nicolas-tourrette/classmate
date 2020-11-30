@@ -4,6 +4,8 @@ This is a little web TypeScript application to perform a booking system for appo
 
 ## Current version
 
+![Deploy Classmate via SSH](https://github.com/nicolas-tourrette/classmate/workflows/Deploy%20Classmate%20via%20SSH/badge.svg)
+
 V1.1.2-RC1 - November 27th 2020
 
 ## Changes compared to previous version
