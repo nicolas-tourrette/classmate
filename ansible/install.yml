@@ -30,3 +30,26 @@
   
   roles:
     - role: app
+
+  post_tasks:
+    - name: POST | Send email
+      mail:
+        host: "{{ mail_server }}"
+        port: "{{ mail_server_port }}"
+        secure: starttls
+        username: "{{ mail_server_username }}"
+        password: "{{ mail_server_password }}"
+        from: Gestionnaire Classmate <noreply@nicolas-t.ovh>
+        to: "{{ mail_server_receivers }}"
+        subject: "Classmate {{ current_version }}"
+        charset: utf8
+        subtype: html
+        body: |
+          <p>Bonjour,</p>
+          <p>Une nouvelle version de Classmate vient d'être publiée. Elle est désormais disponible en ligne à l'adresse <a href="{{ release_address
+          }}">{{ release_address }}</a>. La  version publiée est la {{ current_version }}.</p>
+          <p>Cordialement,</p>
+          <p>Le gestionnaire Classmate</p>
+          <p></p>
+          <p><pre>--<br>
+          Ceci est un e-mail automatique, merci de ne pas y répondre.</pre></p>
